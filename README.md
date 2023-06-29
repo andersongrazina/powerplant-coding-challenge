@@ -1,1 +1,2 @@
-# powerplant-coding-challenge
+What is the PowerPlant Project?
+=====================

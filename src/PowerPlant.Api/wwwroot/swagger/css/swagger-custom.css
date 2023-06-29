@@ -1,0 +1,23 @@
+﻿body {
+    background: #fff;
+}
+
+.swagger-ui img {
+    content: url('../images/logo.png');
+    width: 140px;
+    height: auto;
+    margin-bottom: -20px;
+    margin-top: -20px;
+}
+
+.swagger-ui .topbar {
+    background: linear-gradient(to right, #fff 15%, #01AFEE 92%);
+}
+
+.swagger-ui .topbar .download-url-wrapper .select-label select {
+    border: 2px solid #02b0ef;
+}
+
+.swagger-ui .info .title small:last-child {
+    background-color: #6ed2b1 !important;
+}
