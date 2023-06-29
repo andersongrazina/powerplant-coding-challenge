@@ -2,6 +2,7 @@
 
 namespace PowerPlant.Application.DTO
 {
+    [JsonObject]
     public class FuelsDTO
     {
         [JsonProperty("gas(euro/MWh)")]

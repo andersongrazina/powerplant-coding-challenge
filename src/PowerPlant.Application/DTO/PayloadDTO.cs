@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PowerPlant.Application.DTO
 {
+    [JsonObject]
     public class PayloadDTO
     {
         [JsonProperty("load")]

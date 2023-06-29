@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PowerPlant.Application.DTO
 {
+    [JsonObject]
     public class PowerPlantDTO
     {
         [JsonProperty("name")]

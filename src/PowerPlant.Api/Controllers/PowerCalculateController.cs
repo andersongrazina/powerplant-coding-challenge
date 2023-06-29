@@ -27,7 +27,7 @@ namespace PowerPlant.Api.Controllers
         /// <returns>returns how much power each powerplant should deliver</returns>
         /// <response code="400">If the item is null</response>  
         [HttpPost]
-        public List<PowerPlantResponseDTO> Post([FromBody] PayloadDTO payloadDTO)
+        public List<PowerPlantResponse> Post([FromBody] PayloadDTO payloadDTO)
         {
             return powerCalculateAppService.CalculatePower(payloadDTO);
         }

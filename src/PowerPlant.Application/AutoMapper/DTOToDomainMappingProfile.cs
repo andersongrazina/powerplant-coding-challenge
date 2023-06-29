@@ -22,6 +22,12 @@ namespace PowerPlant.Application.AutoMapper
 
             CreateMap<PowerPlantDTO, Models.WindTurbinePlant>()
                 .IncludeBase<PowerPlantDTO, Models.PowerPlant>();
+
+            CreateMap<Models.PowerPlant, Models.PowerSupply>()
+               .ForMember(o => o.PowerPlant, m => m.MapFrom(s => s.Name))
+               .ForMember(o => o.MinimumPowerAmount, m => m.MapFrom(s => s.MinimumPowerAmount))
+               .ForMember(o => o.MaximumPowerAmount, m => m.MapFrom(s => s.MaximumPowerAmount))
+               .ForMember(o => o.EnergyCost, m => m.MapFrom(s => s.CalculateEnergyCost()));
         }
     }
 }

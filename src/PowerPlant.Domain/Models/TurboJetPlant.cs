@@ -14,14 +14,6 @@ namespace PowerPlant.Domain.Models
             Kerosine = kerosine;
         }
 
-        public override decimal CalculateEnergyCost()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override decimal ProducePower(int load)
-        {
-            throw new NotImplementedException();
-        }
+        public override decimal CalculateEnergyCost() => Kerosine / Efficiency;
     }
 }

@@ -3,7 +3,7 @@
     public class GasfiredPlant : PowerPlant
     {
         /// <summary>
-        /// Ton Per MWh
+        /// For this challenge, you may take into account that each MWh generated creates 0.3 ton of CO2.
         /// </summary>
         private const decimal TonPerMWh = 0.3m;
 
@@ -23,19 +23,11 @@
             CO2 = co2;
         }
 
-        public override decimal CalculateEnergyCost()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override decimal ProducePower(int load)
-        {
-            throw new System.NotImplementedException();
-        }
+        public override decimal CalculateEnergyCost() => Gas / Efficiency;
 
         public decimal CalculateCO2Cost()
         {
-            return 0;
+            throw new System.NotImplementedException();
         }
     }
 }

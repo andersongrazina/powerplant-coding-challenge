@@ -16,12 +16,22 @@ namespace PowerPlant.Domain.Models
 
         public override decimal CalculateEnergyCost()
         {
-            throw new NotImplementedException();
+            return decimal.Zero;
         }
 
-        public override decimal ProducePower(int load)
+        public override int ProducePower(int load)
         {
-            throw new NotImplementedException();
+            var windMinimumPowerAmount = (int)(Wind * MinimumPowerAmount) / 100;
+            var windMaximumPowerAmount = (int)(Wind * MaximumPowerAmount) / 100;
+
+            if (windMinimumPowerAmount > load)
+            {
+                return 0;
+            }
+
+            return load > windMaximumPowerAmount ? windMaximumPowerAmount : load;
         }
+
+        public override bool CanOperate() => Efficiency > 0 && MaximumPowerAmount > 0 && Wind > 0;
     }
 }
