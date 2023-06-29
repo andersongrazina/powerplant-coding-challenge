@@ -2,7 +2,6 @@
 using PowerPlant.Application.DTO;
 using PowerPlant.Application.Factories;
 using PowerPlant.Application.Interfaces;
-using PowerPlant.Domain.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Models = PowerPlant.Domain.Models;
@@ -20,55 +19,64 @@ namespace PowerPlant.Application.Services
 
         public List<PowerPlantResponse> CalculatePower(PayloadDTO payloadDTO)
         {
-            var powerplants = new List<Models.PowerPlant>();
-            var supplyRequireds = new List<PowerSupply>();
+            var powerplants = BuildPowerPlants(payloadDTO);
+            var supplyAmountRequired = new List<Models.PowerSupply>();
             var loadingRequired = payloadDTO.Load;
-
-            foreach (var powerplantDTO in payloadDTO.Powerplants)
-            {
-                powerplants.Add(PowerPlantFactory.Build(mapper, payloadDTO.Fuels, powerplantDTO));
-            }
 
             foreach (var powerplant in powerplants.OrderBy(p => p.CalculateEnergyCost()).ThenBy(p => p.MinimumPowerAmount))
             {
-                if (loadingRequired == 0)
+                var powerProduced = 0;
+                if (loadingRequired > 0)
+                {
+                    if (loadingRequired < powerplant.MinimumPowerAmount)
+                    {
+                        RedistributeSupplyAmount(powerplant, supplyAmountRequired, ref loadingRequired);
+                    }
+
+
+                    if (powerplant.CanOperate())
+                    {
+                        powerProduced = powerplant.ProducePower(loadingRequired);
+                        if (powerProduced > 0)
+                        {
+                            loadingRequired -= powerProduced;
+                        }
+                    }
+                }
+
+                supplyAmountRequired.Add(mapper.Map(powerplant, new Models.PowerSupply(powerProduced)));
+            }
+
+            return supplyAmountRequired.Select(s => mapper.Map<PowerPlantResponse>(s)).ToList();
+        }
+
+        private IEnumerable<Models.PowerPlant> BuildPowerPlants(PayloadDTO payloadDTO)
+        {
+            foreach (var powerplantDTO in payloadDTO.Powerplants)
+            {
+                yield return PowerPlantFactory.Build(mapper, payloadDTO.Fuels, powerplantDTO);
+            }
+        }
+
+        private void RedistributeSupplyAmount(Models.PowerPlant powerplant, List<Models.PowerSupply> supplyAmountRequired, ref int loadingRequired)
+        {
+            var requiredDeficit = powerplant.MinimumPowerAmount - loadingRequired;
+            foreach (var supplyRequired in supplyAmountRequired.OrderByDescending(s => s.EnergyCost))
+            {
+                if (requiredDeficit == 0)
                 {
                     break;
                 }
 
-                if (loadingRequired < powerplant.MinimumPowerAmount)
-                {
-                    var requiredDeficit = powerplant.MinimumPowerAmount - loadingRequired;
-                    foreach (var supplyRequired in supplyRequireds.OrderByDescending(s => s.EnergyCost))
-                    {
-                        if (requiredDeficit == 0)
-                        {
-                            break;
-                        }
+                var deficit = supplyRequired.PowerProduced - requiredDeficit < supplyRequired.MinimumPowerAmount ?
+                    supplyRequired.PowerProduced - supplyRequired.MinimumPowerAmount : requiredDeficit;
 
-                        var deficit = supplyRequired.PowerProduced - requiredDeficit < supplyRequired.MinimumPowerAmount ?
-                            supplyRequired.PowerProduced - supplyRequired.MinimumPowerAmount : requiredDeficit;
+                deficit = deficit > supplyRequired.MaximumPowerAmount ? supplyRequired.MaximumPowerAmount : deficit;
 
-                        deficit = deficit > supplyRequired.MaximumPowerAmount ? supplyRequired.MaximumPowerAmount : deficit;
-
-                        supplyRequired.PowerProduced -= deficit;
-                        requiredDeficit -= deficit;
-                        loadingRequired += deficit;
-                    }
-                }
-
-                if (powerplant.CanOperate())
-                {
-                    var powerProduced = powerplant.ProducePower(loadingRequired);
-                    if (powerProduced > 0)
-                    {
-                        loadingRequired -= powerProduced;
-                        supplyRequireds.Add(mapper.Map(powerplant, new Models.PowerSupply(powerProduced)));
-                    }
-                }
+                supplyRequired.PowerProduced -= deficit;
+                requiredDeficit -= deficit;
+                loadingRequired += deficit;
             }
-
-            return supplyRequireds.Select(s => new PowerPlantResponse { Name = s.PowerPlant, Power = s.PowerProduced }).ToList();
         }
     }
 }
