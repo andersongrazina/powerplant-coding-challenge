@@ -5,7 +5,7 @@ namespace PowerPlant.Application.ValidationAttributes
 {
     public class PowerPlantTypeValidationAttribute : ValidationAttribute
     {
-        private string[] powerplantTypes = { "gasfired", "turbojet", "windturbine" };
+        private readonly string[] powerplantTypes = { "gasfired", "turbojet", "windturbine" };
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
