@@ -11,13 +11,13 @@
 }
 
 .swagger-ui .topbar {
-    background: linear-gradient(to right, #fff 15%, #02b0ef 90%);
+    background: linear-gradient(to right, #fff 15%, #808080 90%);
 }
 
 .swagger-ui .topbar .download-url-wrapper .select-label select {
-    border: 2px solid #02b0ef;
+    border: 2px solid #808080;
 }
 
 .swagger-ui .info .title small:last-child {
-    background-color: #0094ff !important;
+    background-color: #808080 !important;
 }
