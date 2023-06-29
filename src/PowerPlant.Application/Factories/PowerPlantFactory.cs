@@ -17,7 +17,7 @@ namespace PowerPlant.Application.Factories
                 case "windturbine": { return mapper.Map(powerPlantDTO, new WindTurbinePlant(fuelsDTO.Wind)); }
             }
 
-            throw new Exception("PowerPlant type not recognized");
+            throw new Exception("PowerPlant type was not recognized");
         }
     }
 }

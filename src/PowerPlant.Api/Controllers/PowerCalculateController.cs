@@ -21,10 +21,10 @@ namespace PowerPlant.Api.Controllers
         }
 
         /// <summary>
-        /// Calculate how much power each of a multitude of different powerplants need to produce when the load is given.
+        /// Calculate how much power each powerplants need to produce when the load is given.
         /// </summary>
         /// <param name="payloadDTO">A payload structure contain the load, fuels and powerplants information.</param>
-        /// <returns>returns how much power each powerplant should deliver</returns>
+        /// <returns>Returns how much power each powerplant should deliver</returns>
         /// <response code="400">If the item is null</response>  
         [HttpPost]
         public List<PowerPlantResponse> Post([FromBody] PayloadDTO payloadDTO)

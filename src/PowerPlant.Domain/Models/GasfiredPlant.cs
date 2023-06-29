@@ -24,10 +24,5 @@
         }
 
         public override decimal CalculateEnergyCost() => Gas / Efficiency;
-
-        public decimal CalculateCO2Cost()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

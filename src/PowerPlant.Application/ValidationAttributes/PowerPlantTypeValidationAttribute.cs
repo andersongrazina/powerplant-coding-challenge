@@ -14,7 +14,7 @@ namespace PowerPlant.Application.ValidationAttributes
                 return ValidationResult.Success;
             }
 
-            var msg = $"Please enter one of the required powerplant types: {string.Join(", ", powerplantTypes)}.";
+            var msg = $"Please fill one of the required powerplant types: {string.Join(", ", powerplantTypes)}.";
             return new ValidationResult(msg);
         }
     }

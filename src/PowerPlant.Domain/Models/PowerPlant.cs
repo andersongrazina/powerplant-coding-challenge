@@ -2,9 +2,25 @@
 {
     public abstract class PowerPlant
     {
+
+        /// <summary>
+        /// Name
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Efficiency
+        /// </summary>
         public decimal Efficiency { get; set; }
+
+        /// <summary>
+        /// Minimum Power Amount
+        /// </summary>
         public int MinimumPowerAmount { get; set; }
+
+        /// <summary>
+        /// Maximum Power Amount
+        /// </summary>
         public int MaximumPowerAmount { get; set; }
 
         /// <summary>

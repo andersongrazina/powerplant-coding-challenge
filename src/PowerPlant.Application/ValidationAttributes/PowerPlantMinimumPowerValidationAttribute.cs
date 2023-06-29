@@ -14,7 +14,7 @@ namespace PowerPlant.Application.ValidationAttributes
                 return ValidationResult.Success;
             }
 
-            var msg = $"The minimum power(pmin) can't be higher than maximum power(pmax)";
+            var msg = $"The minimum power(pmin) can't be higher than the maximum power(pmax)";
             return new ValidationResult(msg);
         }
     }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PowerPlant.Domain.Models
+﻿namespace PowerPlant.Domain.Models
 {
     public class WindTurbinePlant : PowerPlant
     {

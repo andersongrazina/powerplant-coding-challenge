@@ -4,14 +4,14 @@
 
 .swagger-ui img {
     content: url('../images/logo.png');
-    width: 140px;
+    width: 130px;
     height: auto;
     margin-bottom: -20px;
     margin-top: -20px;
 }
 
 .swagger-ui .topbar {
-    background: linear-gradient(to right, #fff 15%, #01AFEE 92%);
+    background: linear-gradient(to right, #fff 15%, #02b0ef 90%);
 }
 
 .swagger-ui .topbar .download-url-wrapper .select-label select {
@@ -19,5 +19,5 @@
 }
 
 .swagger-ui .info .title small:last-child {
-    background-color: #6ed2b1 !important;
+    background-color: #0094ff !important;
 }
