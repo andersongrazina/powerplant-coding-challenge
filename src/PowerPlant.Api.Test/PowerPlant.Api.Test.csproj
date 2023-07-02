@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\PowerPlant.Api\PowerPlant.Api.csproj" />
+    <ProjectReference Include="..\PowerPlant.Api\PowerPlant.Api.csproj" />
+    <ProjectReference Include="..\PowerPlant.Application\PowerPlant.Application.csproj" />
   </ItemGroup>
 
 </Project>

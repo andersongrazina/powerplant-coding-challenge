@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\PowerPlant.Application\PowerPlant.Application.csproj" />
+    <ProjectReference Include="..\PowerPlant.Application\PowerPlant.Application.csproj" />
   </ItemGroup>
 
 </Project>
