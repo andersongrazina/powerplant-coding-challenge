@@ -18,10 +18,10 @@ DDD architecture used
 
 SOLID Concepts (All Methods following the SOLID's principles)
 
+Tests using NSubstitute and xUnit
+
 =====================
 
 **Aspects not implemented**
 
 Security (Authentication, Authorization)
-
-Tests (Unit and Integration)
