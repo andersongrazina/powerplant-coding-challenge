@@ -2,6 +2,7 @@
 using PowerPlant.Application.DTO;
 using PowerPlant.Application.Factories;
 using PowerPlant.Application.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Models = PowerPlant.Domain.Models;
@@ -14,7 +15,7 @@ namespace PowerPlant.Application.Services
 
         public PowerCalculationAppService(IMapper mapper)
         {
-            this.mapper = mapper;
+            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper)); ;
         }
 
         public List<PowerPlantResponse> CalculatePower(PayloadDTO payloadDTO)
@@ -32,7 +33,6 @@ namespace PowerPlant.Application.Services
                     {
                         RedistributeSupplyAmount(powerplant, supplyAmountRequired, ref loadingRequired);
                     }
-
 
                     if (powerplant.CanOperate())
                     {

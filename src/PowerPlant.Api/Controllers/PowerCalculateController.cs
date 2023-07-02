@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using PowerPlant.Application.DTO;
 using PowerPlant.Application.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace PowerPlant.Api.Controllers
@@ -16,8 +17,8 @@ namespace PowerPlant.Api.Controllers
 
         public PowerCalculateController(ILogger<PowerCalculateController> logger, IPowerCalculationAppService powerCalculateAppService)
         {
-            this.logger = logger;
-            this.powerCalculateAppService = powerCalculateAppService;
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.powerCalculateAppService = powerCalculateAppService ?? throw new ArgumentNullException(nameof(powerCalculateAppService));
         }
 
         /// <summary>
